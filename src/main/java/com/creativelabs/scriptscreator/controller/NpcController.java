@@ -3,7 +3,7 @@ package com.creativelabs.scriptscreator.controller;
 import com.creativelabs.scriptscreator.dto.NpcDto;
 import com.creativelabs.scriptscreator.exception.NotFoundException;
 import com.creativelabs.scriptscreator.mapper.NpcMapper;
-import com.creativelabs.scriptscreator.service.NpcService;
+import com.creativelabs.scriptscreator.service.NpcServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,7 +15,7 @@ public class NpcController {
     @Autowired
     private NpcMapper mapper;
     @Autowired
-    private NpcService service;
+    private NpcServiceImpl service;
 
     @GetMapping
     public List<NpcDto> getNpcs() {
@@ -35,7 +35,7 @@ public class NpcController {
 
     @PutMapping("{id}")
     public NpcDto updateNpc(@PathVariable Long id, @RequestBody NpcDto npcDto) {
-        return mapper.mapToNpcDto(service.saveNpc(mapper.mapToNpc(npcDto)));
+        return mapper.mapToNpcDto(service.updateNpcById(id, npcDto));
     }
 
     @DeleteMapping("{id}")

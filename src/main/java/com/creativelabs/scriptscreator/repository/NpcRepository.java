@@ -8,7 +8,6 @@ import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
-@Transactional
 @Repository
 public interface NpcRepository extends CrudRepository<Npc, Long> {
     @Override
