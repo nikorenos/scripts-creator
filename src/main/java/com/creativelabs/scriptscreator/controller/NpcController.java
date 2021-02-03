@@ -4,18 +4,17 @@ import com.creativelabs.scriptscreator.dto.NpcDto;
 import com.creativelabs.scriptscreator.exception.NotFoundException;
 import com.creativelabs.scriptscreator.mapper.NpcMapper;
 import com.creativelabs.scriptscreator.service.NpcServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/v1/npcs")
 public class NpcController {
-    @Autowired
-    private NpcMapper mapper;
-    @Autowired
-    private NpcServiceImpl service;
+    private final NpcMapper mapper;
+    private final NpcServiceImpl service;
 
     @GetMapping
     public List<NpcDto> getNpcs() {

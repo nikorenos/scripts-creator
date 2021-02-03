@@ -4,18 +4,16 @@ import com.creativelabs.scriptscreator.domain.trello.CreatedTrelloCard;
 import com.creativelabs.scriptscreator.dto.trello.TrelloBoardDto;
 import com.creativelabs.scriptscreator.dto.trello.TrelloCardDto;
 import com.creativelabs.scriptscreator.service.TrelloService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/v1/trello")
-@CrossOrigin("*")
+@RequiredArgsConstructor
 public class TrelloController {
-
-    @Autowired
-    private TrelloService trelloService;
+    private final TrelloService trelloService;
 
     @RequestMapping(method = RequestMethod.GET, value = "/getTrelloBoards")
     public List<TrelloBoardDto> getTrelloBoards() {

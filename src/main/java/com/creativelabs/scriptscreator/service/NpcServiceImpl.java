@@ -4,16 +4,16 @@ import com.creativelabs.scriptscreator.domain.Npc;
 import com.creativelabs.scriptscreator.dto.NpcDto;
 import com.creativelabs.scriptscreator.exception.NotFoundException;
 import com.creativelabs.scriptscreator.repository.NpcRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@RequiredArgsConstructor
 @Service
 public class NpcServiceImpl implements NpcService {
-    @Autowired
-    private NpcRepository npcRepository;
+    private final NpcRepository npcRepository;
 
     public List<Npc> getAllNpcs() {
         return npcRepository.findAll();

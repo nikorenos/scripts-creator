@@ -5,9 +5,9 @@ import com.creativelabs.scriptscreator.config.TrelloConfig;
 import com.creativelabs.scriptscreator.domain.trello.CreatedTrelloCard;
 import com.creativelabs.scriptscreator.dto.trello.TrelloBoardDto;
 import com.creativelabs.scriptscreator.dto.trello.TrelloCardDto;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
@@ -20,14 +20,13 @@ import java.util.List;
 
 import static java.util.Optional.ofNullable;
 
+@RequiredArgsConstructor
 @Component
 public class TrelloClient {
     private static final Logger LOGGER = LoggerFactory.getLogger(TrelloClient.class);
 
-    @Autowired
-    private RestTemplate restTemplate;
-    @Autowired
-    private TrelloConfig trelloConfig;
+    private final RestTemplate restTemplate;
+    private final TrelloConfig trelloConfig;
 
     private URI urlBuilder() {
         URI url = UriComponentsBuilder.fromHttpUrl(trelloConfig.getTrelloApiEndpoint() + "/members/" + trelloConfig.getTrelloUsername() + "/boards")
