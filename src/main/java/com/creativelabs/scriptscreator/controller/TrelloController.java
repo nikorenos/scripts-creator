@@ -15,12 +15,12 @@ import java.util.List;
 public class TrelloController {
     private final TrelloService trelloService;
 
-    @RequestMapping(method = RequestMethod.GET, value = "/getTrelloBoards")
+    @GetMapping
     public List<TrelloBoardDto> getTrelloBoards() {
         return trelloService.fetchTrelloBoards();
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/createTrelloCard")
+    @PostMapping
     public CreatedTrelloCard createTrelloCard(@RequestBody TrelloCardDto trelloCardDto) {
         return trelloService.createTrelloCard(trelloCardDto);
     }
