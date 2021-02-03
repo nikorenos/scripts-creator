@@ -2,6 +2,7 @@ package com.creativelabs.scriptscreator.controller;
 
 import com.creativelabs.scriptscreator.domain.trello.CreatedTrelloCard;
 import com.creativelabs.scriptscreator.dto.trello.TrelloBoardDto;
+import com.creativelabs.scriptscreator.dto.trello.TrelloBoardListDto;
 import com.creativelabs.scriptscreator.dto.trello.TrelloCardDto;
 import com.creativelabs.scriptscreator.service.TrelloService;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +20,10 @@ public class TrelloController {
     public List<TrelloBoardDto> getTrelloBoards() {
         return trelloService.fetchTrelloBoards();
     }
-
+    @GetMapping("boards/{boardId}/lists")
+    public List<TrelloBoardListDto> getTrelloBoardLists(@PathVariable String boardId) {
+        return trelloService.fetchTrelloBoardLists(boardId);
+    }
     @PostMapping
     public CreatedTrelloCard createTrelloCard(@RequestBody TrelloCardDto trelloCardDto) {
         return trelloService.createTrelloCard(trelloCardDto);
