@@ -32,6 +32,11 @@ public class TrelloController {
                                                      @RequestBody TrelloListDto trelloListDto) {
         return trelloService.createTrelloList(boardId, trelloListDto);
     }
+    @PutMapping("lists/{listId}")
+    public void updateTrelloListOnBoard(@PathVariable String listId,
+                                                     @RequestBody TrelloListDto trelloListDto) {
+        trelloService.updateTrelloList(listId, trelloListDto);
+    }
 
     @PostMapping
     public CreatedTrelloCard createTrelloCard(@RequestBody TrelloCardDto trelloCardDto) {

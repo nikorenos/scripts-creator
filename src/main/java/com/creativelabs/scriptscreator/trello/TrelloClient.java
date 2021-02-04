@@ -70,6 +70,13 @@ public class TrelloClient {
         return restTemplate.postForObject(url, null, CreatedTrelloList.class);
     }
 
+    public void updateList(String listId, TrelloListDto trelloListDto) {
+        URI url = UriComponentsBuilder.fromHttpUrl(trelloConfig.getTrelloApiEndpoint() + "/lists/" + listId)
+                .queryParam("key", trelloConfig.getTrelloAppKey())
+                .queryParam("token", trelloConfig.getTrelloToken()).build().encode().toUri();
+        restTemplate.put(url, trelloListDto);
+    }
+
     public CreatedTrelloCard createNewCard(TrelloCardDto trelloCardDto) {
         URI url = UriComponentsBuilder.fromHttpUrl(trelloConfig.getTrelloApiEndpoint() + "/cards")
                 .queryParam("key", trelloConfig.getTrelloAppKey())

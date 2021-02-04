@@ -29,6 +29,11 @@ public class TrelloService {
         CreatedTrelloList newList = trelloClient.createNewList(boardId, trelloListDto);
         return newList;
     }
+
+    public void updateTrelloList(final String listId, TrelloListDto trelloListDto) {
+        trelloClient.updateList(listId, trelloListDto);
+    }
+
     public CreatedTrelloCard createTrelloCard(final TrelloCardDto trelloCardDto) {
         CreatedTrelloCard newCard = trelloClient.createNewCard(trelloCardDto);
         return newCard;
