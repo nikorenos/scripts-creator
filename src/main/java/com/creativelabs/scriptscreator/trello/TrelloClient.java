@@ -70,7 +70,7 @@ public class TrelloClient {
         return restTemplate.postForObject(url, null, CreatedTrelloList.class);
     }
 
-    public void updateList(String listId, TrelloListDto trelloListDto) {
+    public void updateList(String listId, final TrelloListDto trelloListDto) {
         URI url = UriComponentsBuilder.fromHttpUrl(trelloConfig.getTrelloApiEndpoint() + "/lists/" + listId)
                 .queryParam("key", trelloConfig.getTrelloAppKey())
                 .queryParam("token", trelloConfig.getTrelloToken()).build().encode().toUri();
@@ -86,5 +86,16 @@ public class TrelloClient {
                 .queryParam("pos", trelloCardDto.getPos())
                 .queryParam("idList", trelloCardDto.getListId()).build().encode().toUri();
         return restTemplate.postForObject(url, null, CreatedTrelloCard.class);
+    }
+
+    public void updateCard(String cardId, TrelloCardDto trelloCardDto) {
+        URI url = UriComponentsBuilder.fromHttpUrl(trelloConfig.getTrelloApiEndpoint() + "/cards/" + cardId)
+                .queryParam("key", trelloConfig.getTrelloAppKey())
+                .queryParam("token", trelloConfig.getTrelloToken())
+                .queryParam("name", trelloCardDto.getName())
+                .queryParam("desc", trelloCardDto.getDescription())
+                .queryParam("pos", trelloCardDto.getPos())
+                .queryParam("idList", trelloCardDto.getListId()).build().encode().toUri();
+        restTemplate.put(url, trelloCardDto);
     }
 }

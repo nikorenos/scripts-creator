@@ -42,4 +42,10 @@ public class TrelloController {
     public CreatedTrelloCard createTrelloCard(@RequestBody TrelloCardDto trelloCardDto) {
         return trelloService.createTrelloCard(trelloCardDto);
     }
+
+    @PutMapping("cards/{cardId}")
+    public void updateTrelloCard(@PathVariable String cardId,
+                                        @RequestBody TrelloCardDto trelloCardDto) {
+        trelloService.updateTrelloCard(cardId, trelloCardDto);
+    }
 }
