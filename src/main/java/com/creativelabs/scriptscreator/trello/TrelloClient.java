@@ -3,9 +3,11 @@ package com.creativelabs.scriptscreator.trello;
 
 import com.creativelabs.scriptscreator.config.TrelloConfig;
 import com.creativelabs.scriptscreator.domain.trello.CreatedTrelloCard;
+import com.creativelabs.scriptscreator.domain.trello.CreatedTrelloList;
 import com.creativelabs.scriptscreator.dto.trello.TrelloBoardDto;
 import com.creativelabs.scriptscreator.dto.trello.TrelloBoardListDto;
 import com.creativelabs.scriptscreator.dto.trello.TrelloCardDto;
+import com.creativelabs.scriptscreator.dto.trello.TrelloListDto;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -57,6 +59,15 @@ public class TrelloClient {
             LOGGER.error(e.getMessage(),e);
             return new ArrayList<>();
         }
+    }
+
+    public CreatedTrelloList createNewList(String boardId, TrelloListDto trelloListDto) {
+        URI url = UriComponentsBuilder.fromHttpUrl(trelloConfig.getTrelloApiEndpoint() + "/boards/" + boardId + "/lists")
+                .queryParam("key", trelloConfig.getTrelloAppKey())
+                .queryParam("token", trelloConfig.getTrelloToken())
+                .queryParam("name", trelloListDto.getName())
+                .queryParam("pos", trelloListDto.getPos()).build().encode().toUri();
+        return restTemplate.postForObject(url, null, CreatedTrelloList.class);
     }
 
     public CreatedTrelloCard createNewCard(TrelloCardDto trelloCardDto) {
