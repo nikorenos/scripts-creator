@@ -1,6 +1,7 @@
 package com.creativelabs.scriptscreator.service;
 
 import com.creativelabs.scriptscreator.client.ImgurClient;
+import com.creativelabs.scriptscreator.domain.image.Image;
 import com.creativelabs.scriptscreator.dto.imgur.ImageDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -12,5 +13,10 @@ public class ImgurService {
 
     public ImageDto fetchImgurImage(final String imageId) {
         return imgurClient.getImage(imageId);
+    }
+
+    public ImageDto uploadImage(final Image file) {
+        ImageDto newImage = imgurClient.uploadImage(file);
+        return  newImage;
     }
 }

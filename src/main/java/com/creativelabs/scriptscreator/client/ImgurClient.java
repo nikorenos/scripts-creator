@@ -1,6 +1,7 @@
 package com.creativelabs.scriptscreator.client;
 
 import com.creativelabs.scriptscreator.config.ImgurConfig;
+import com.creativelabs.scriptscreator.domain.image.Image;
 import com.creativelabs.scriptscreator.dto.imgur.ImageDto;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -32,5 +33,12 @@ public class ImgurClient {
             LOGGER.error(e.getMessage(),e);
             return new ImageDto();
         }
+    }
+
+    public ImageDto uploadImage(Image file) {
+        URI url = UriComponentsBuilder.fromHttpUrl(imgurConfig.getImgurApiEndpoint() + "/upload/authorize")
+                .queryParam("client_id", imgurConfig.getImgurClientId())
+                .queryParam("image", file.getImage()).build().encode().toUri();
+        return restTemplate.postForObject(url, null, ImageDto.class);
     }
 }

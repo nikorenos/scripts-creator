@@ -1,12 +1,10 @@
 package com.creativelabs.scriptscreator.controller;
 
+import com.creativelabs.scriptscreator.domain.image.Image;
 import com.creativelabs.scriptscreator.dto.imgur.ImageDto;
 import com.creativelabs.scriptscreator.service.ImgurService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/v1/imgur")
@@ -17,5 +15,10 @@ public class ImgurController {
     @GetMapping("image/{imageId}")
     public ImageDto getImgurImage(@PathVariable String imageId) {
         return imgurService.fetchImgurImage(imageId);
+    }
+
+    @PostMapping
+    public ImageDto uploadImage(@RequestBody Image file) {
+        return imgurService.uploadImage(file);
     }
 }
