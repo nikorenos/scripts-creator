@@ -21,7 +21,7 @@ public class TrelloService {
         return trelloClient.getTrelloBoards();
     }
 
-    public List<TrelloBoardListDto> fetchTrelloBoardLists(String boardId) {
+    public List<TrelloBoardListDto> fetchTrelloBoardLists(final String boardId) {
         return trelloClient.getTrelloBoardLists(boardId);
     }
 
@@ -32,6 +32,10 @@ public class TrelloService {
 
     public void updateTrelloList(final String listId, final TrelloListDto trelloListDto) {
         trelloClient.updateList(listId, trelloListDto);
+    }
+
+    public TrelloCardDto fetchTrelloCard(final String cardId) {
+        return trelloClient.getCard(cardId);
     }
 
     public CreatedTrelloCard createTrelloCard(final TrelloCardDto trelloCardDto) {

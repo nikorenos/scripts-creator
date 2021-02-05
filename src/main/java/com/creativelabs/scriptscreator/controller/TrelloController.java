@@ -38,6 +38,11 @@ public class TrelloController {
         trelloService.updateTrelloList(listId, trelloListDto);
     }
 
+    @GetMapping("cards/{cardId}")
+    public TrelloCardDto getTrelloCard(@PathVariable String cardId) {
+        return trelloService.fetchTrelloCard(cardId);
+    }
+
     @PostMapping
     public CreatedTrelloCard createTrelloCard(@RequestBody TrelloCardDto trelloCardDto) {
         return trelloService.createTrelloCard(trelloCardDto);

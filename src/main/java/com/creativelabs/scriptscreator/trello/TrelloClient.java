@@ -77,14 +77,28 @@ public class TrelloClient {
         restTemplate.put(url, trelloListDto);
     }
 
+    public TrelloCardDto getCard(String cardId) {
+        URI url = UriComponentsBuilder.fromHttpUrl(trelloConfig.getTrelloApiEndpoint() + "/cards/" + cardId)
+                .queryParam("key", trelloConfig.getTrelloAppKey())
+                .queryParam("token", trelloConfig.getTrelloToken())
+                .queryParam("fields", "name,desc,pos,shortUrl,idAttachmentCover,idList,idBoard").build().encode().toUri();
+        try {
+            TrelloCardDto cardResponse = restTemplate.getForObject(url, TrelloCardDto.class);
+            return (ofNullable(cardResponse).orElse(new TrelloCardDto()));
+        } catch (RestClientException e) {
+            LOGGER.error(e.getMessage(),e);
+            return new TrelloCardDto();
+        }
+    }
+
     public CreatedTrelloCard createNewCard(TrelloCardDto trelloCardDto) {
         URI url = UriComponentsBuilder.fromHttpUrl(trelloConfig.getTrelloApiEndpoint() + "/cards")
                 .queryParam("key", trelloConfig.getTrelloAppKey())
                 .queryParam("token", trelloConfig.getTrelloToken())
                 .queryParam("name", trelloCardDto.getName())
-                .queryParam("desc", trelloCardDto.getDescription())
+                .queryParam("desc", trelloCardDto.getDesc())
                 .queryParam("pos", trelloCardDto.getPos())
-                .queryParam("idList", trelloCardDto.getListId()).build().encode().toUri();
+                .queryParam("idList", trelloCardDto.getIdList()).build().encode().toUri();
         return restTemplate.postForObject(url, null, CreatedTrelloCard.class);
     }
 
@@ -93,9 +107,9 @@ public class TrelloClient {
                 .queryParam("key", trelloConfig.getTrelloAppKey())
                 .queryParam("token", trelloConfig.getTrelloToken())
                 .queryParam("name", trelloCardDto.getName())
-                .queryParam("desc", trelloCardDto.getDescription())
+                .queryParam("desc", trelloCardDto.getDesc())
                 .queryParam("pos", trelloCardDto.getPos())
-                .queryParam("idList", trelloCardDto.getListId()).build().encode().toUri();
+                .queryParam("idList", trelloCardDto.getIdList()).build().encode().toUri();
         restTemplate.put(url, trelloCardDto);
     }
 }
