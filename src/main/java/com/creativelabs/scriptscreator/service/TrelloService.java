@@ -47,4 +47,7 @@ public class TrelloService {
     public List<TrelloCardAttachmentsDto> fetchTrelloCardAttachments(final String cardId) {
         return trelloClient.getCardAttachments(cardId);
     }
+    public TrelloCardAttachmentsDto createTrelloCardAttachment(final String cardId, final String url) {
+        return trelloClient.createCardAttachment(cardId, url);
+    }
 }

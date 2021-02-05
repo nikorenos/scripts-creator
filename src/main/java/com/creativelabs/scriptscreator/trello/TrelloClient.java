@@ -124,4 +124,12 @@ public class TrelloClient {
             return new ArrayList<>();
         }
     }
+
+    public TrelloCardAttachmentsDto createCardAttachment(String cardId, String url) {
+        URI urlPath = UriComponentsBuilder.fromHttpUrl(trelloConfig.getTrelloApiEndpoint() + "/cards/" + cardId + "/attachments")
+                .queryParam("key", trelloConfig.getTrelloAppKey())
+                .queryParam("token", trelloConfig.getTrelloToken())
+                .queryParam("url", url).build().encode().toUri();
+        return restTemplate.postForObject(urlPath, null, TrelloCardAttachmentsDto.class);
+    }
 }

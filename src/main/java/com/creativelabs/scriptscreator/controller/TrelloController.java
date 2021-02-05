@@ -55,4 +55,9 @@ public class TrelloController {
     public List<TrelloCardAttachmentsDto> getTrelloCardAttachments(@PathVariable String cardId) {
         return trelloService.fetchTrelloCardAttachments(cardId);
     }
+
+    @PostMapping("cards/{cardId}/attachments")
+    public TrelloCardAttachmentsDto createTrelloCardAttachment(@PathVariable String cardId, @RequestParam String url) {
+        return trelloService.createTrelloCardAttachment(cardId, url);
+    }
 }
