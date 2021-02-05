@@ -4,10 +4,7 @@ package com.creativelabs.scriptscreator.trello;
 import com.creativelabs.scriptscreator.config.TrelloConfig;
 import com.creativelabs.scriptscreator.domain.trello.CreatedTrelloCard;
 import com.creativelabs.scriptscreator.domain.trello.CreatedTrelloList;
-import com.creativelabs.scriptscreator.dto.trello.TrelloBoardDto;
-import com.creativelabs.scriptscreator.dto.trello.TrelloBoardListDto;
-import com.creativelabs.scriptscreator.dto.trello.TrelloCardDto;
-import com.creativelabs.scriptscreator.dto.trello.TrelloListDto;
+import com.creativelabs.scriptscreator.dto.trello.*;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -111,5 +108,20 @@ public class TrelloClient {
                 .queryParam("pos", trelloCardDto.getPos())
                 .queryParam("idList", trelloCardDto.getIdList()).build().encode().toUri();
         restTemplate.put(url, trelloCardDto);
+    }
+
+    public List<TrelloCardAttachmentsDto> getCardAttachments(String cardId) {
+        URI url = UriComponentsBuilder.fromHttpUrl(trelloConfig.getTrelloApiEndpoint() + "/cards/" + cardId + "/attachments")
+                .queryParam("key", trelloConfig.getTrelloAppKey())
+                .queryParam("token", trelloConfig.getTrelloToken())
+                .queryParam("fields", "id,name,bytes,url,filename").build().encode().toUri();
+
+        try {
+            TrelloCardAttachmentsDto[] cardResponse = restTemplate.getForObject(url, TrelloCardAttachmentsDto[].class);
+            return Arrays.asList(ofNullable(cardResponse).orElse(new TrelloCardAttachmentsDto[0]));
+        } catch (RestClientException e) {
+            LOGGER.error(e.getMessage(),e);
+            return new ArrayList<>();
+        }
     }
 }

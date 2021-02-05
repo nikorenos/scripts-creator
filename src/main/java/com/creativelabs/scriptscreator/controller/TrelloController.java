@@ -2,10 +2,7 @@ package com.creativelabs.scriptscreator.controller;
 
 import com.creativelabs.scriptscreator.domain.trello.CreatedTrelloCard;
 import com.creativelabs.scriptscreator.domain.trello.CreatedTrelloList;
-import com.creativelabs.scriptscreator.dto.trello.TrelloBoardDto;
-import com.creativelabs.scriptscreator.dto.trello.TrelloBoardListDto;
-import com.creativelabs.scriptscreator.dto.trello.TrelloCardDto;
-import com.creativelabs.scriptscreator.dto.trello.TrelloListDto;
+import com.creativelabs.scriptscreator.dto.trello.*;
 import com.creativelabs.scriptscreator.service.TrelloService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -52,5 +49,10 @@ public class TrelloController {
     public void updateTrelloCard(@PathVariable String cardId,
                                         @RequestBody TrelloCardDto trelloCardDto) {
         trelloService.updateTrelloCard(cardId, trelloCardDto);
+    }
+
+    @GetMapping("cards/{cardId}/attachments")
+    public List<TrelloCardAttachmentsDto> getTrelloCardAttachments(@PathVariable String cardId) {
+        return trelloService.fetchTrelloCardAttachments(cardId);
     }
 }
