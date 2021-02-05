@@ -3,7 +3,7 @@ package com.creativelabs.scriptscreator.service;
 import com.creativelabs.scriptscreator.domain.trello.CreatedTrelloCard;
 import com.creativelabs.scriptscreator.domain.trello.CreatedTrelloList;
 import com.creativelabs.scriptscreator.dto.trello.*;
-import com.creativelabs.scriptscreator.trello.TrelloClient;
+import com.creativelabs.scriptscreator.client.TrelloClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

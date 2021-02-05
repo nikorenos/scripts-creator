@@ -1,4 +1,4 @@
-package com.creativelabs.scriptscreator.trello;
+package com.creativelabs.scriptscreator.client;
 
 
 import com.creativelabs.scriptscreator.config.TrelloConfig;
