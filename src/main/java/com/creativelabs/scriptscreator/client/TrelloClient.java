@@ -2,7 +2,6 @@ package com.creativelabs.scriptscreator.client;
 
 
 import com.creativelabs.scriptscreator.config.TrelloConfig;
-import com.creativelabs.scriptscreator.domain.trello.CreatedTrelloCard;
 import com.creativelabs.scriptscreator.domain.trello.CreatedTrelloList;
 import com.creativelabs.scriptscreator.dto.trello.*;
 import lombok.RequiredArgsConstructor;
@@ -88,7 +87,7 @@ public class TrelloClient {
         }
     }
 
-    public CreatedTrelloCard createNewCard(TrelloCardDto trelloCardDto) {
+    public CreatedTrelloCardDto createNewCard(TrelloCardDto trelloCardDto) {
         URI url = UriComponentsBuilder.fromHttpUrl(trelloConfig.getTrelloApiEndpoint() + "/cards")
                 .queryParam("key", trelloConfig.getTrelloAppKey())
                 .queryParam("token", trelloConfig.getTrelloToken())
@@ -96,7 +95,7 @@ public class TrelloClient {
                 .queryParam("desc", trelloCardDto.getDesc())
                 .queryParam("pos", trelloCardDto.getPos())
                 .queryParam("idList", trelloCardDto.getIdList()).build().encode().toUri();
-        return restTemplate.postForObject(url, null, CreatedTrelloCard.class);
+        return restTemplate.postForObject(url, null, CreatedTrelloCardDto.class);
     }
 
     public void updateCard(String cardId, TrelloCardDto trelloCardDto) {

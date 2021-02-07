@@ -1,6 +1,5 @@
 package com.creativelabs.scriptscreator.service;
 
-import com.creativelabs.scriptscreator.domain.trello.CreatedTrelloCard;
 import com.creativelabs.scriptscreator.domain.trello.CreatedTrelloList;
 import com.creativelabs.scriptscreator.dto.trello.*;
 import com.creativelabs.scriptscreator.client.TrelloClient;
@@ -35,8 +34,8 @@ public class TrelloService {
         return trelloClient.getCard(cardId);
     }
 
-    public CreatedTrelloCard createTrelloCard(final TrelloCardDto trelloCardDto) {
-        CreatedTrelloCard newCard = trelloClient.createNewCard(trelloCardDto);
+    public CreatedTrelloCardDto createTrelloCard(final TrelloCardDto trelloCardDto) {
+        CreatedTrelloCardDto newCard = trelloClient.createNewCard(trelloCardDto);
         return newCard;
     }
 

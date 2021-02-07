@@ -1,6 +1,5 @@
 package com.creativelabs.scriptscreator.controller;
 
-import com.creativelabs.scriptscreator.domain.trello.CreatedTrelloCard;
 import com.creativelabs.scriptscreator.domain.trello.CreatedTrelloList;
 import com.creativelabs.scriptscreator.dto.trello.*;
 import com.creativelabs.scriptscreator.service.TrelloService;
@@ -41,7 +40,7 @@ public class TrelloController {
     }
 
     @PostMapping
-    public CreatedTrelloCard createTrelloCard(@RequestBody TrelloCardDto trelloCardDto) {
+    public CreatedTrelloCardDto createTrelloCard(@RequestBody TrelloCardDto trelloCardDto) {
         return trelloService.createTrelloCard(trelloCardDto);
     }
 
