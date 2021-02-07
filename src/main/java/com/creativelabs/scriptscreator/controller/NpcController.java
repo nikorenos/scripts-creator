@@ -39,6 +39,6 @@ public class NpcController {
 
     @DeleteMapping("{id}")
     public void deleteNpc(@PathVariable Long id) {
-        service.deleteById(id);
+        service.deleteNpcById(id);
     }
 }
