@@ -21,7 +21,7 @@ public class TrelloController {
     }
 
     @GetMapping("boards/{boardId}/lists")
-    public List<TrelloBoardListDto> getTrelloBoardLists(@PathVariable String boardId) {
+    public List<TrelloListDto> getTrelloBoardLists(@PathVariable String boardId) {
         return trelloService.fetchTrelloBoardLists(boardId);
     }
     @PostMapping("boards/{boardId}/lists")

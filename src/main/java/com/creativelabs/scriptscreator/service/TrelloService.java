@@ -18,7 +18,7 @@ public class TrelloService {
         return trelloClient.getTrelloBoards();
     }
 
-    public List<TrelloBoardListDto> fetchTrelloBoardLists(final String boardId) {
+    public List<TrelloListDto> fetchTrelloBoardLists(final String boardId) {
         return trelloClient.getTrelloBoardLists(boardId);
     }
 

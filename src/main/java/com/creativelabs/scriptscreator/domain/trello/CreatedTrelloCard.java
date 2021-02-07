@@ -1,6 +1,5 @@
 package com.creativelabs.scriptscreator.domain.trello;
 
-import com.creativelabs.scriptscreator.dto.trello.BadgesDto;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -21,13 +20,4 @@ public class CreatedTrelloCard {
 
     @JsonProperty("shortUrl")
     private String shortUrl;
-
-    @JsonProperty("badges")
-    private BadgesDto badges;
-
-    public CreatedTrelloCard(String id, String name, String shortUrl) {
-        this.id = id;
-        this.name = name;
-        this.shortUrl = shortUrl;
-    }
 }

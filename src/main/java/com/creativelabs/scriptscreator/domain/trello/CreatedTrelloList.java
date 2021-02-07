@@ -1,6 +1,5 @@
 package com.creativelabs.scriptscreator.domain.trello;
 
-import com.creativelabs.scriptscreator.dto.trello.BadgesDto;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;

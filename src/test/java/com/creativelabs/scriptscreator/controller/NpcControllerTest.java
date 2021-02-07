@@ -1,4 +1,4 @@
-package com.creativelabs.scriptscreator.npcs;
+package com.creativelabs.scriptscreator.controller;
 
 
 import com.creativelabs.scriptscreator.controller.NpcController;

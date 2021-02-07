@@ -43,15 +43,15 @@ public class TrelloClient {
             return new ArrayList<>();
         }
     }
-    public List<TrelloBoardListDto> getTrelloBoardLists(String boardId) {
+    public List<TrelloListDto> getTrelloBoardLists(String boardId) {
         URI url = UriComponentsBuilder.fromHttpUrl(trelloConfig.getTrelloApiEndpoint() + "/boards/" + boardId + "/lists")
                 .queryParam("key", trelloConfig.getTrelloAppKey())
                 .queryParam("token", trelloConfig.getTrelloToken())
                 .queryParam("fields", "name,id,idBoard").build().encode().toUri();
 
         try {
-            TrelloBoardListDto[] boardsResponse = restTemplate.getForObject(url, TrelloBoardListDto[].class);
-            return Arrays.asList(ofNullable(boardsResponse).orElse(new TrelloBoardListDto[0]));
+            TrelloListDto[] boardsResponse = restTemplate.getForObject(url, TrelloListDto[].class);
+            return Arrays.asList(ofNullable(boardsResponse).orElse(new TrelloListDto[0]));
         } catch (RestClientException e) {
             LOGGER.error(e.getMessage(),e);
             return new ArrayList<>();
