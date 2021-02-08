@@ -6,7 +6,7 @@ import com.creativelabs.scriptscreator.dto.trello.TrelloCardDto;
 import com.creativelabs.scriptscreator.dto.trello.TrelloListDto;
 import com.creativelabs.scriptscreator.service.TrelloService;
 import com.google.gson.Gson;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentMatchers;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +44,7 @@ public class TrelloControllerTest {
         when(service.fetchTrelloBoards()).thenReturn(trelloBoards);
 
         // When & Then
-        mockMvc.perform(get("/v1/trello/boards").contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get("/v1/trello").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().is(200)) //or isOk()
                 .andExpect(jsonPath("$", hasSize(0)));
     }
@@ -61,7 +61,7 @@ public class TrelloControllerTest {
         when(service.fetchTrelloBoards()).thenReturn(trelloBoards);
 
         // When & Then
-        mockMvc.perform(get("/v1/trello/boards").contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get("/v1/trello").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 // Trello board fields
                 .andExpect(jsonPath("$", hasSize(1)))
@@ -82,14 +82,14 @@ public class TrelloControllerTest {
                 "Test",
                 "Test description",
                 "top",
-                "url",
+                "http://test.com",
                 "idAttachmentCover",
                 "idList",
                 "idBoard");
         CreatedTrelloCardDto createdTrelloCardDto = new CreatedTrelloCardDto(
                 "323",
                 "Test",
-                "Test description");
+                "http://test.com");
 
         when(service.createTrelloCard(ArgumentMatchers.any(TrelloCardDto.class))).thenReturn(createdTrelloCardDto);
 
@@ -97,7 +97,7 @@ public class TrelloControllerTest {
         String jsonContent = gson.toJson(trelloCardDto);
 
         // When & Then
-        mockMvc.perform(post("/v1/trello/cards")
+        mockMvc.perform(post("/v1/trello")
                 .contentType(MediaType.APPLICATION_JSON)
                 .characterEncoding("UTF-8")
                 .content(jsonContent))

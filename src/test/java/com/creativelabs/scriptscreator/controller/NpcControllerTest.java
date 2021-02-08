@@ -7,7 +7,7 @@ import com.creativelabs.scriptscreator.dto.NpcDto;
 import com.creativelabs.scriptscreator.mapper.NpcMapper;
 import com.creativelabs.scriptscreator.service.NpcServiceImpl;
 import com.google.gson.Gson;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -84,11 +84,11 @@ public class NpcControllerTest {
         when(mapper.mapToNpcDto(npc.get())).thenReturn(npcDto);
 
         // When & Then
-        mockMvc.perform(get("/v1/Npcs/1").contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get("/v1/npcs/1").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(1)))
-                .andExpect(jsonPath("$.title", is("Npc 1")))
-                .andExpect(jsonPath("$.content", is("Npc 1 description")));
+                .andExpect(jsonPath("$.name", is("Npc 1")))
+                .andExpect(jsonPath("$.description", is("Npc 1 description")));
     }
 
     @Test
@@ -118,7 +118,7 @@ public class NpcControllerTest {
         String jsonContent = gson.toJson(npcDto);
 
         // When & Then
-        mockMvc.perform(post("/v1/Npcs")
+        mockMvc.perform(post("/v1/npcs")
                 .contentType(MediaType.APPLICATION_JSON)
                 .characterEncoding("UTF-8")
                 .content(jsonContent))
@@ -128,25 +128,24 @@ public class NpcControllerTest {
     @Test
     public void shouldUpdateNpc() throws Exception {
         // Given
-        Npc npc = new Npc(1L, "Npc 1", "Npc 1 description");
-        NpcDto npcDto = new NpcDto(1L, "Npc 1", "Npc 1 description");
+        Npc updatedNpc = new Npc(1L, "Npc update", "Npc update description");
+        NpcDto npcDto = new NpcDto(1L, "Npc update", "Npc update description");
 
-        when(mapper.mapToNpc(any(NpcDto.class))).thenReturn(npc);
-        when(service.saveNpc(npc)).thenReturn(npc);
+        when(service.updateNpcById(1L, npcDto)).thenReturn(updatedNpc);
         when(mapper.mapToNpcDto(any(Npc.class))).thenReturn(npcDto);
 
         Gson gson = new Gson();
         String jsonContent = gson.toJson(npcDto);
 
         // When & Then
-        mockMvc.perform(put("/v1/npcs")
+        mockMvc.perform(put("/v1/npcs/1")
                 .contentType(MediaType.APPLICATION_JSON)
                 .characterEncoding("UTF-8")
                 .content(jsonContent))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(1)))
-                .andExpect(jsonPath("$.title", is("Npc 1")))
-                .andExpect(jsonPath("$.content", is("Npc 1 description")));
+                .andExpect(jsonPath("$.name", is("Npc update")))
+                .andExpect(jsonPath("$.description", is("Npc update description")));
     }
 
 }
