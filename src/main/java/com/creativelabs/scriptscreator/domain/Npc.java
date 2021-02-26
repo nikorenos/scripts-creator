@@ -21,4 +21,5 @@ public class Npc {
     private Long id;
     private String name;
     private String description;
+    private String location;
 }

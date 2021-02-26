@@ -13,19 +13,21 @@ public class NpcMapper {
         return new Npc(
                 npcDto.getId(),
                 npcDto.getName(),
-                npcDto.getDescription());
+                npcDto.getDescription(),
+                npcDto.getLocation());
     }
 
     public NpcDto mapToNpcDto(final Npc npc) {
         return new NpcDto(
                 npc.getId(),
                 npc.getName(),
-                npc.getDescription());
+                npc.getDescription(),
+                npc.getLocation());
     }
 
     public List<NpcDto> mapToNpcDtoList(final List<Npc> npcList) {
         return npcList.stream()
-                .map(t -> new NpcDto(t.getId(), t.getName(), t.getDescription()))
+                .map(t -> new NpcDto(t.getId(), t.getName(), t.getDescription(), t.getLocation()))
                 .collect(Collectors.toList());
     }
 }
