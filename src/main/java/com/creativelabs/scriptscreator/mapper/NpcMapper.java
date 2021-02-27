@@ -14,7 +14,10 @@ public class NpcMapper {
                 npcDto.getId(),
                 npcDto.getName(),
                 npcDto.getDescription(),
-                npcDto.getLocation());
+                npcDto.getLocation(),
+                npcDto.getTrelloCardId(),
+                npcDto.getTrelloCardUrl()
+        );
     }
 
     public NpcDto mapToNpcDto(final Npc npc) {
@@ -22,12 +25,15 @@ public class NpcMapper {
                 npc.getId(),
                 npc.getName(),
                 npc.getDescription(),
-                npc.getLocation());
+                npc.getLocation(),
+                npc.getTrelloCardId(),
+                npc.getTrelloCardUrl()
+        );
     }
 
     public List<NpcDto> mapToNpcDtoList(final List<Npc> npcList) {
         return npcList.stream()
-                .map(t -> new NpcDto(t.getId(), t.getName(), t.getDescription(), t.getLocation()))
+                .map(t -> new NpcDto(t.getId(), t.getName(), t.getDescription(), t.getLocation(), t.getTrelloCardId(), t.getTrelloCardUrl()))
                 .collect(Collectors.toList());
     }
 }

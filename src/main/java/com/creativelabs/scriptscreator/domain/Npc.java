@@ -22,4 +22,6 @@ public class Npc {
     private String name;
     private String description;
     private String location;
+    private String trelloCardId;
+    private String trelloCardUrl;
 }
