@@ -50,6 +50,11 @@ public class TrelloController {
         trelloService.updateTrelloCard(cardId, trelloCardDto);
     }
 
+    @DeleteMapping("cards/{cardId}")
+    public void deleteTrelloCard(@PathVariable String cardId) {
+        trelloService.deleteTrelloCard(cardId);
+    }
+
     @GetMapping("cards/{cardId}/attachments")
     public List<TrelloCardAttachmentsDto> getTrelloCardAttachments(@PathVariable String cardId) {
         return trelloService.fetchTrelloCardAttachments(cardId);

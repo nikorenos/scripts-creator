@@ -109,6 +109,13 @@ public class TrelloClient {
         restTemplate.put(url, trelloCardDto);
     }
 
+    public void deleteCard(String cardId) {
+        URI url = UriComponentsBuilder.fromHttpUrl(trelloConfig.getTrelloApiEndpoint() + "/cards/" + cardId)
+                .queryParam("key", trelloConfig.getTrelloAppKey())
+                .queryParam("token", trelloConfig.getTrelloToken()).build().encode().toUri();
+        restTemplate.delete(url);
+    }
+
     public List<TrelloCardAttachmentsDto> getCardAttachments(String cardId) {
         URI url = UriComponentsBuilder.fromHttpUrl(trelloConfig.getTrelloApiEndpoint() + "/cards/" + cardId + "/attachments")
                 .queryParam("key", trelloConfig.getTrelloAppKey())

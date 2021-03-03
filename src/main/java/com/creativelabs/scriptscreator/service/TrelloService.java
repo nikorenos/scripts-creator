@@ -43,6 +43,10 @@ public class TrelloService {
         trelloClient.updateCard(cardId, trelloCardDto);
     }
 
+    public void deleteTrelloCard(final String cardId) {
+        trelloClient.deleteCard(cardId);
+    }
+
     public List<TrelloCardAttachmentsDto> fetchTrelloCardAttachments(final String cardId) {
         return trelloClient.getCardAttachments(cardId);
     }
