@@ -1,10 +1,11 @@
 package com.creativelabs.scriptscreator.controller;
 
-import com.creativelabs.scriptscreator.domain.image.Image;
 import com.creativelabs.scriptscreator.dto.imgur.ImageDto;
 import com.creativelabs.scriptscreator.service.ImgurService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+
 
 @RestController
 @RequestMapping("/v1/imgur")
@@ -18,7 +19,13 @@ public class ImgurController {
     }
 
     @PostMapping
-    public ImageDto uploadImage(@RequestBody Image file) {
+    public ImageDto uploadImage(@RequestBody MediaType file) {
         return imgurService.uploadImage(file);
     }
+
+    /*private MultipartFile image;
+    @RequestMapping(method = RequestMethod.POST, consumes = { "multipart/form-data" })
+    public @ResponseBody void addPhotoData(@ModelAttribute ImageDto imageDto) {
+
+    }*/
 }

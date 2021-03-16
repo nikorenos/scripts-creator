@@ -1,17 +1,19 @@
 package com.creativelabs.scriptscreator.client;
 
 import com.creativelabs.scriptscreator.config.ImgurConfig;
-import com.creativelabs.scriptscreator.domain.image.Image;
 import com.creativelabs.scriptscreator.dto.imgur.ImageDto;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
+
+
 import static java.util.Optional.ofNullable;
 
 @RequiredArgsConstructor
@@ -35,10 +37,10 @@ public class ImgurClient {
         }
     }
 
-    public ImageDto uploadImage(Image file) {
+    public ImageDto uploadImage(MediaType file) {
         URI url = UriComponentsBuilder.fromHttpUrl(imgurConfig.getImgurApiEndpoint() + "/upload/authorize")
                 .queryParam("client_id", imgurConfig.getImgurClientId())
-                .queryParam("image", file.getImage()).build().encode().toUri();
+                .queryParam("image", file).build().encode().toUri();
         return restTemplate.postForObject(url, null, ImageDto.class);
     }
 }
