@@ -6,23 +6,21 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-@Entity(name = "npcs")
-public class Npc {
+@Entity(name = "camps")
+public class Camp {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @Column(columnDefinition = "longtext")
-    private String description;
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "camp_id")
-    private Camp camp;
-    private String trelloCardId;
-    private String trelloCardUrl;
-    private String attachmentUrl;
+    @OneToMany(targetEntity = Npc.class,
+            mappedBy = "camp",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER)
+    private List<Npc> npcs;
 }
