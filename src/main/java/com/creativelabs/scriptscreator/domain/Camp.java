@@ -18,9 +18,16 @@ public class Camp {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    private String description;
     @OneToMany(targetEntity = Npc.class,
             mappedBy = "camp",
             cascade = CascadeType.ALL,
             fetch = FetchType.EAGER)
-    private List<Npc> npcs;
+    private List<Npc> npcList;
+
+    public Camp(Long id, String name, String description) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+    }
 }

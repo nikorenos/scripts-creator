@@ -25,4 +25,13 @@ public class Npc {
     private String trelloCardId;
     private String trelloCardUrl;
     private String attachmentUrl;
+
+    public Npc(Long id, String name, String description, String trelloCardId, String trelloCardUrl, String attachmentUrl) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.trelloCardId = trelloCardId;
+        this.trelloCardUrl = trelloCardUrl;
+        this.attachmentUrl = attachmentUrl;
+    }
 }
