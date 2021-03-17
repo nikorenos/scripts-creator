@@ -24,7 +24,7 @@ public class NpcController {
     @GetMapping("/{id}")
     public NpcDto getNpc(@PathVariable Long id) throws NotFoundException {
         return mapper.mapToNpcDto(service.getNpc(id).orElseThrow(() -> new NotFoundException("Npc id: " + id +
-                " not found in Npc database")));
+                " not found in database")));
     }
 
     @PostMapping

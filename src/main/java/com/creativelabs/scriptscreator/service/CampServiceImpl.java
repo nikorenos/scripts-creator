@@ -1,43 +1,48 @@
 package com.creativelabs.scriptscreator.service;
 
+import com.creativelabs.scriptscreator.domain.Camp;
+import com.creativelabs.scriptscreator.domain.Npc;
+import com.creativelabs.scriptscreator.dto.CampDto;
+import com.creativelabs.scriptscreator.dto.NpcDto;
+import com.creativelabs.scriptscreator.exception.NotFoundException;
+import com.creativelabs.scriptscreator.repository.CampRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
 public class CampServiceImpl implements CampService {
-
-    /*
-    @RequiredArgsConstructor
-@Service
-public class NpcServiceImpl implements NpcService {
-    private final NpcRepository npcRepository;
+    private final CampRepository repository;
 
     @Override
-    public List<Npc> getAllNpcs() {
-        return npcRepository.findAll();
+    public List<Camp> getAllCamps() {
+        return repository.findAll();
     }
     @Override
-    public Npc saveNpc(final Npc npc) {
-        return npcRepository.save(npc);
+    public Optional<Camp> getCamp(final Long campId) {
+        return repository.findById(campId);
     }
+
     @Override
-    public Optional<Npc> getNpc(final Long npcId) {
-        return npcRepository.findById(npcId);
+    public Camp saveCamp(final Camp camp) {
+        return repository.save(camp);
     }
+
     @Override
-    public void deleteNpcById(final Long npcId) {
-        npcRepository.deleteById(npcId);
+    public void deleteCampById(final Long campId) {
+        repository.deleteById(campId);
     }
+
     @Override
-    public Npc updateNpcById(final Long id, final NpcDto npcDto) throws NotFoundException {
-        Npc foundNpc = npcRepository.findById(id).orElseThrow(() -> new NotFoundException("Npc id: " + id +
-                " not found in Npc database"));
-        foundNpc.setName(npcDto.getName());
-        foundNpc.setDescription(npcDto.getDescription());
-        saveNpc(foundNpc);
-        return foundNpc;
+    public Camp updateCampById(final Long id, final CampDto campDto) throws NotFoundException {
+        Camp foundCamp = repository.findById(id).orElseThrow(() -> new NotFoundException("Camp id: " + id +
+                " not found in database"));
+        foundCamp.setName(campDto.getName());
+        foundCamp.setDescription(campDto.getDescription());
+        saveCamp(foundCamp);
+        return foundCamp;
     }
-}
-    */
 }
