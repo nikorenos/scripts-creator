@@ -2,19 +2,23 @@ package com.creativelabs.scriptscreator.mapper;
 
 import com.creativelabs.scriptscreator.domain.Camp;
 import com.creativelabs.scriptscreator.dto.CampDto;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
+@RequiredArgsConstructor
 public class CampMapper {
+    private final NpcMapper npcMapper;
+
     public Camp mapToCamp(final CampDto campDto) {
         return new Camp(
                 campDto.getId(),
                 campDto.getName(),
                 campDto.getDescription(),
-                campDto.getNpcList()
+                npcMapper.mapToNpcList(campDto.getNpcList())
         );
     }
 
@@ -23,13 +27,13 @@ public class CampMapper {
                 camp.getId(),
                 camp.getName(),
                 camp.getDescription(),
-                camp.getNpcList()
+                npcMapper.mapToNpcDtoList(camp.getNpcList())
         );
     }
 
     public List<CampDto> mapToCampDtoList(final List<Camp> campList) {
         return campList.stream()
-                .map(t -> new CampDto(t.getId(), t.getName(), t.getDescription(), t.getNpcList()))
+                .map(t -> new CampDto(t.getId(), t.getName(), t.getDescription(), npcMapper.mapToNpcDtoList(t.getNpcList())))
                 .collect(Collectors.toList());
     }
 }

@@ -1,12 +1,9 @@
 package com.creativelabs.scriptscreator.controller;
 
 import com.creativelabs.scriptscreator.dto.CampDto;
-import com.creativelabs.scriptscreator.dto.NpcDto;
 import com.creativelabs.scriptscreator.exception.NotFoundException;
 import com.creativelabs.scriptscreator.mapper.CampMapper;
-import com.creativelabs.scriptscreator.mapper.NpcMapper;
 import com.creativelabs.scriptscreator.service.CampServiceImpl;
-import com.creativelabs.scriptscreator.service.NpcServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

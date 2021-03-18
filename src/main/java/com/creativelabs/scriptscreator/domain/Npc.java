@@ -1,5 +1,6 @@
 package com.creativelabs.scriptscreator.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,7 +20,9 @@ public class Npc {
     private String name;
     @Column(columnDefinition = "longtext")
     private String description;
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JsonBackReference(value = "npc-camp")
+    @ManyToOne(cascade = CascadeType.PERSIST,
+            fetch = FetchType.EAGER)
     @JoinColumn(name = "camp_id")
     private Camp camp;
     private String trelloCardId;

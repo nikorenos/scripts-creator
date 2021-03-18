@@ -1,10 +1,9 @@
 package com.creativelabs.scriptscreator.service;
 
 import com.creativelabs.scriptscreator.domain.Camp;
-import com.creativelabs.scriptscreator.domain.Npc;
 import com.creativelabs.scriptscreator.dto.CampDto;
-import com.creativelabs.scriptscreator.dto.NpcDto;
 import com.creativelabs.scriptscreator.exception.NotFoundException;
+import com.creativelabs.scriptscreator.mapper.NpcMapper;
 import com.creativelabs.scriptscreator.repository.CampRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,6 +15,7 @@ import java.util.Optional;
 @Service
 public class CampServiceImpl implements CampService {
     private final CampRepository repository;
+    private final NpcMapper npcMapper;
 
     @Override
     public List<Camp> getAllCamps() {
@@ -42,6 +42,7 @@ public class CampServiceImpl implements CampService {
                 " not found in database"));
         foundCamp.setName(campDto.getName());
         foundCamp.setDescription(campDto.getDescription());
+        foundCamp.setNpcList(npcMapper.mapToNpcList(campDto.getNpcList()));
         saveCamp(foundCamp);
         return foundCamp;
     }

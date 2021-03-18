@@ -1,7 +1,6 @@
 package com.creativelabs.scriptscreator.repository;
 
 import com.creativelabs.scriptscreator.domain.Camp;
-import com.creativelabs.scriptscreator.domain.Npc;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

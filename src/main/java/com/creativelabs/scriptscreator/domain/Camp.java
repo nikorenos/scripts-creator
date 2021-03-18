@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
@@ -23,7 +24,7 @@ public class Camp {
             mappedBy = "camp",
             cascade = CascadeType.ALL,
             fetch = FetchType.EAGER)
-    private List<Npc> npcList;
+    private List<Npc> npcList = new ArrayList<>();
 
     public Camp(Long id, String name, String description) {
         this.id = id;

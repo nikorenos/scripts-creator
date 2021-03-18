@@ -43,4 +43,10 @@ public class NpcMapper {
                 .map(this::mapToNpcDto)
                 .collect(Collectors.toList());
     }
+
+    public List<Npc> mapToNpcList(final List<NpcDto> npcDtoList) {
+        return npcDtoList.stream()
+                .map(this::mapToNpc)
+                .collect(Collectors.toList());
+    }
 }
