@@ -37,8 +37,8 @@ public class NpcController {
         return mapper.mapToNpcDto(service.updateNpcById(id, npcDto));
     }
 
-    @DeleteMapping("{id}")
-    public void deleteNpc(@PathVariable Long id) {
-        service.deleteNpcById(id);
+    @DeleteMapping("{npcId}")
+    public void deleteNpc(@PathVariable Long npcId, @RequestParam Long campId) {
+        service.deleteNpc(npcId, campId);
     }
 }

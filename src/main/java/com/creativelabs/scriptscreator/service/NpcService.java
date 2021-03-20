@@ -11,6 +11,6 @@ public interface NpcService {
     List<Npc> getAllNpcs();
     Npc saveNpc(final Npc npc);
     Optional<Npc> getNpc(final Long id);
-    void deleteNpcById(final Long id);
+    void deleteNpc(final Long npcId, final Long campId) throws NotFoundException;
     Npc updateNpcById(final Long id, final NpcDto npcDto) throws NotFoundException;
 }

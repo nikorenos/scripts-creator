@@ -14,31 +14,31 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Service
 public class CampServiceImpl implements CampService {
-    private final CampRepository repository;
+    private final CampRepository campRepository;
     private final NpcMapper npcMapper;
 
     @Override
     public List<Camp> getAllCamps() {
-        return repository.findAll();
+        return campRepository.findAll();
     }
     @Override
     public Optional<Camp> getCamp(final Long campId) {
-        return repository.findById(campId);
+        return campRepository.findById(campId);
     }
 
     @Override
     public Camp saveCamp(final Camp camp) {
-        return repository.save(camp);
+        return campRepository.save(camp);
     }
 
     @Override
     public void deleteCampById(final Long campId) {
-        repository.deleteById(campId);
+        campRepository.deleteById(campId);
     }
 
     @Override
     public Camp updateCampById(final Long id, final CampDto campDto) throws NotFoundException {
-        Camp foundCamp = repository.findById(id).orElseThrow(() -> new NotFoundException("Camp id: " + id +
+        Camp foundCamp = campRepository.findById(id).orElseThrow(() -> new NotFoundException("Camp id: " + id +
                 " not found in database"));
         foundCamp.setName(campDto.getName());
         foundCamp.setDescription(campDto.getDescription());

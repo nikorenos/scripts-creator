@@ -15,28 +15,34 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Service
 public class NpcServiceImpl implements NpcService {
-    private final NpcRepository repository;
+    private final NpcRepository npcRepository;
     private final CampRepository campRepository;
 
     @Override
     public List<Npc> getAllNpcs() {
-        return repository.findAll();
+        return npcRepository.findAll();
     }
     @Override
     public Npc saveNpc(final Npc npc) {
-        return repository.save(npc);
+        return npcRepository.save(npc);
     }
     @Override
     public Optional<Npc> getNpc(final Long npcId) {
-        return repository.findById(npcId);
+        return npcRepository.findById(npcId);
     }
+
     @Override
-    public void deleteNpcById(final Long npcId) {
-        repository.deleteById(npcId);
+    public void deleteNpc(final Long npcId, final Long campId) {
+        Camp foundCamp = campRepository.findById(campId).orElseThrow(() -> new NotFoundException("Camp id: " + campId +
+                " not found in database"));
+        Npc foundNpc = npcRepository.findById(npcId).orElseThrow(() -> new NotFoundException("Npc id: " + npcId +
+                " not found in database"));
+        foundCamp.getNpcList().remove(foundNpc);
+        npcRepository.deleteById(npcId);
     }
     @Override
     public Npc updateNpcById(final Long id, final NpcDto npcDto) throws NotFoundException {
-        Npc foundNpc = repository.findById(id).orElseThrow(() -> new NotFoundException("Npc id: " + id +
+        Npc foundNpc = npcRepository.findById(id).orElseThrow(() -> new NotFoundException("Npc id: " + id +
                 " not found in database"));
         foundNpc.setName(npcDto.getName());
         foundNpc.setDescription(npcDto.getDescription());

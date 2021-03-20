@@ -24,7 +24,7 @@ public class Camp {
             mappedBy = "camp",
             cascade = CascadeType.ALL,
             fetch = FetchType.EAGER)
-    private List<Npc> npcList = new ArrayList<>();
+    private List<Npc> npcList;
 
     public Camp(Long id, String name, String description) {
         this.id = id;
