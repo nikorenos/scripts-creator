@@ -9,6 +9,8 @@ import com.creativelabs.scriptscreator.repository.NpcRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,6 +26,8 @@ public class NpcServiceImpl implements NpcService {
     }
     @Override
     public Npc saveNpc(final Npc npc) {
+        int scriptId = generateScriptId();
+        npc.setScriptId(scriptId);
         return npcRepository.save(npc);
     }
     @Override
@@ -51,5 +55,24 @@ public class NpcServiceImpl implements NpcService {
         foundNpc.setCamp(camp);
         saveNpc(foundNpc);
         return foundNpc;
+    }
+
+    public int generateScriptId() {
+        List<Integer> scriptIdList = new ArrayList<>();
+        boolean foundLack = false;
+        if (npcRepository.findAll().size() == 0) {
+            return 1;
+        } else {
+            for (Npc npc : npcRepository.findAll()) {
+                scriptIdList.add(npc.getScriptId());
+            }
+            Collections.sort(scriptIdList);
+            for (int i = 0; i < scriptIdList.size(); i++) {
+                if (i+1 != scriptIdList.get(i)) {
+                    return (i+1);
+                }
+            }
+            return scriptIdList.size() + 1;
+        }
     }
 }

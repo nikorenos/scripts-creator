@@ -19,6 +19,7 @@ public class NpcMapper {
     public Npc mapToNpc(final NpcDto npcDto) {
         Npc npc = new Npc();
         npc.setId(null);
+        npc.setScriptId(npcDto.getScriptId());
         npc.setName(npcDto.getName());
         npc.setDescription(npcDto.getDescription());
         Camp camp = campRepository.findById(npcDto.getCampId())
@@ -31,6 +32,7 @@ public class NpcMapper {
     public NpcDto mapToNpcDto(final Npc npc) {
         NpcDto npcDto = new NpcDto();
         npcDto.setId(npc.getId());
+        npcDto.setScriptId(npc.getScriptId());
         npcDto.setName(npc.getName());
         npcDto.setDescription(npc.getDescription());
         npcDto.setCampId(npc.getCamp().getId());

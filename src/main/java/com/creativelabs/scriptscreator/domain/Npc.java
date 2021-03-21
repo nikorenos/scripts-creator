@@ -17,6 +17,7 @@ public class Npc {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private Integer scriptId;
     private String name;
     @Column(columnDefinition = "longtext")
     private String description;
