@@ -36,10 +36,11 @@ public class NpcServiceImpl implements NpcService {
     }
 
     @Override
-    public void deleteNpc(final Long npcId, final Long campId) {
-        Camp foundCamp = campRepository.findById(campId).orElseThrow(() -> new NotFoundException("Camp id: " + campId +
-                " not found in database"));
+    public void deleteNpc(final Long npcId) {
         Npc foundNpc = npcRepository.findById(npcId).orElseThrow(() -> new NotFoundException("Npc id: " + npcId +
+                " not found in database"));
+        Long campId = foundNpc.getCamp().getId();
+        Camp foundCamp = campRepository.findById(campId).orElseThrow(() -> new NotFoundException("Camp id: " + campId +
                 " not found in database"));
         foundCamp.getNpcList().remove(foundNpc);
         npcRepository.deleteById(npcId);
@@ -59,7 +60,6 @@ public class NpcServiceImpl implements NpcService {
 
     public int generateScriptId() {
         List<Integer> scriptIdList = new ArrayList<>();
-        boolean foundLack = false;
         if (npcRepository.findAll().size() == 0) {
             return 1;
         } else {
