@@ -1,7 +1,6 @@
 package com.creativelabs.scriptscreator.controller;
 
 
-import com.creativelabs.scriptscreator.controller.NpcController;
 import com.creativelabs.scriptscreator.domain.Npc;
 import com.creativelabs.scriptscreator.dto.NpcDto;
 import com.creativelabs.scriptscreator.mapper.NpcMapper;
@@ -58,9 +57,9 @@ public class NpcControllerTest {
     public void shouldFetchNpcsList() throws Exception {
         // Given
         List<Npc> npcList = new ArrayList<>();
-        npcList.add(new Npc(1L, "Npc 1", "Npc 1 description"));
+        npcList.add(new Npc(1L, "Npc 1", "Npc 1 description", "Location", "cardId", "cardUrl", "attachmentUrl"));
         List<NpcDto> npcListDto = new ArrayList<>();
-        npcListDto.add(new NpcDto(1L, "Npc 1", "Npc 1 description"));
+        npcListDto.add(new NpcDto(1L, "Npc 1", "Npc 1 description", "Location", "cardId", "cardUrl", "attachmentUrl"));
 
         when(service.getAllNpcs()).thenReturn(npcList);
         when(mapper.mapToNpcDtoList(npcList)).thenReturn(npcListDto);
@@ -76,8 +75,8 @@ public class NpcControllerTest {
     @Test
     public void shouldFetchNpc() throws Exception {
         // Given
-        NpcDto npcDto = new NpcDto(1L, "Npc 1", "Npc 1 description");
-        Optional<Npc> npc = Optional.of(new Npc(1L, "Npc 1", "Npc 1 description"));
+        NpcDto npcDto = new NpcDto(1L, "Npc 1", "Npc 1 description", "Location", "cardId", "cardUrl", "attachmentUrl");
+        Optional<Npc> npc = Optional.of(new Npc(1L, "Npc 1", "Npc 1 description", "Location", "cardId", "cardUrl", "attachmentUrl"));
         long npcId = npcDto.getId();
 
         when(service.getNpc(npcId)).thenReturn(npc);
@@ -94,9 +93,9 @@ public class NpcControllerTest {
     @Test
     public void shouldDeleteNpc() throws Exception {
         // Given
-        Npc npc = new Npc(1L, "Npc 1", "Npc 1 description");
+        Npc npc = new Npc(1L, "Npc 1", "Npc 1 description", "Location", "cardId", "cardUrl", "attachmentUrl");
         Long npcId = npc.getId();
-        Optional<Npc> foundNpc = Optional.of(new Npc(1L, "Npc 1", "Npc 1 description"));
+        Optional<Npc> foundNpc = Optional.of(new Npc(1L, "Npc 1", "Npc 1 description", "Location", "cardId", "cardUrl", "attachmentUrl"));
 
         when(service.getNpc(npcId)).thenReturn(foundNpc);
 
@@ -108,8 +107,8 @@ public class NpcControllerTest {
     @Test
     public void shouldCreateNpc() throws Exception {
         // Given
-        Npc npc = new Npc(1L, "Npc 1", "Npc 1 description");
-        NpcDto npcDto = new NpcDto(1L, "Npc 1", "Npc 1 description");
+        Npc npc = new Npc(1L, "Npc 1", "Npc 1 description", "Location", "cardId", "cardUrl", "attachmentUrl");
+        NpcDto npcDto = new NpcDto(1L, "Npc 1", "Npc 1 description", "Location", "cardId", "cardUrl", "attachmentUrl");
 
         when(mapper.mapToNpc(npcDto)).thenReturn(npc);
         when(service.saveNpc(npc)).thenReturn(npc);
@@ -128,8 +127,8 @@ public class NpcControllerTest {
     @Test
     public void shouldUpdateNpc() throws Exception {
         // Given
-        Npc updatedNpc = new Npc(1L, "Npc update", "Npc update description");
-        NpcDto npcDto = new NpcDto(1L, "Npc update", "Npc update description");
+        Npc updatedNpc = new Npc(1L, "Npc 1", "Npc 1 description", "Location", "cardId", "cardUrl", "attachmentUrl");
+        NpcDto npcDto = new NpcDto(1L, "Npc update", "Npc update description", "Location", "cardId", "cardUrl", "attachmentUrl");
 
         when(service.updateNpcById(1L, npcDto)).thenReturn(updatedNpc);
         when(mapper.mapToNpcDto(any(Npc.class))).thenReturn(npcDto);

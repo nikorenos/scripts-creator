@@ -53,7 +53,7 @@ public class TrelloControllerTest {
     public void shouldFetchTrelloBoards() throws Exception {
         // Given
         List<TrelloListDto> trelloLists = new ArrayList<>();
-        trelloLists.add(new TrelloListDto("Test 1", "top", "testId"));
+        trelloLists.add(new TrelloListDto("1", "Test list", "top"));
 
         List<TrelloBoardDto> trelloBoards = new ArrayList<>();
         trelloBoards.add(new TrelloBoardDto("1", "Test board", trelloLists));
@@ -69,9 +69,9 @@ public class TrelloControllerTest {
                 .andExpect(jsonPath("$[0].name", is("Test board")))
                 // Trello list fields
                 .andExpect(jsonPath("$[0].lists", hasSize(1)))
-                .andExpect(jsonPath("$[0].lists[0].name", is("Test 1")))
+                .andExpect(jsonPath("$[0].lists[0].name", is("Test list")))
                 .andExpect(jsonPath("$[0].lists[0].pos", is("top")))
-                .andExpect(jsonPath("$[0].lists[0].boardId", is("testId")));
+                .andExpect(jsonPath("$[0].lists[0].id", is("1")));
 
     }
 
