@@ -46,7 +46,7 @@ public class TrelloClient {
         URI url = UriComponentsBuilder.fromHttpUrl(trelloConfig.getTrelloApiEndpoint() + "/boards/" + boardId + "/lists")
                 .queryParam("key", trelloConfig.getTrelloAppKey())
                 .queryParam("token", trelloConfig.getTrelloToken())
-                .queryParam("fields", "id,name,pos").build().encode().toUri();
+                .queryParam("fields", "id,name,pos,closed").build().encode().toUri();
 
         try {
             TrelloListDto[] boardsResponse = restTemplate.getForObject(url, TrelloListDto[].class);
@@ -57,7 +57,7 @@ public class TrelloClient {
         }
     }
 
-    public CreatedTrelloList createNewList(String boardId, TrelloListDto trelloListDto) {
+    public CreatedTrelloList createList(String boardId, TrelloListDto trelloListDto) {
         URI url = UriComponentsBuilder.fromHttpUrl(trelloConfig.getTrelloApiEndpoint() + "/boards/" + boardId + "/lists")
                 .queryParam("key", trelloConfig.getTrelloAppKey())
                 .queryParam("token", trelloConfig.getTrelloToken())

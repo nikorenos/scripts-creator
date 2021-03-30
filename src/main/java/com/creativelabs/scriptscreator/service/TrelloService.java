@@ -22,7 +22,7 @@ public class TrelloService {
     }
 
     public CreatedTrelloList createTrelloList(final String boardId, TrelloListDto trelloListDto) {
-        CreatedTrelloList newList = trelloClient.createNewList(boardId, trelloListDto);
+        CreatedTrelloList newList = trelloClient.createList(boardId, trelloListDto);
         return newList;
     }
 

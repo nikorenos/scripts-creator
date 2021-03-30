@@ -16,6 +16,7 @@ public class CampMapper {
     public Camp mapToCamp(final CampDto campDto) {
         return new Camp(
                 campDto.getId(),
+                campDto.getTrelloListId(),
                 campDto.getName(),
                 campDto.getDescription(),
                 npcMapper.mapToNpcList(campDto.getNpcList())
@@ -25,6 +26,7 @@ public class CampMapper {
     public CampDto mapToCampDto(final Camp camp) {
         return new CampDto(
                 camp.getId(),
+                camp.getTrelloListId(),
                 camp.getName(),
                 camp.getDescription(),
                 npcMapper.mapToNpcDtoList(camp.getNpcList())
@@ -33,7 +35,7 @@ public class CampMapper {
 
     public List<CampDto> mapToCampDtoList(final List<Camp> campList) {
         return campList.stream()
-                .map(t -> new CampDto(t.getId(), t.getName(), t.getDescription(), npcMapper.mapToNpcDtoList(t.getNpcList())))
+                .map(this::mapToCampDto)
                 .collect(Collectors.toList());
     }
 }

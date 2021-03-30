@@ -13,6 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 public class CampDto {
     private Long id;
+    private String trelloListId;
     private String name;
     private String description;
     private List<NpcDto> npcList;
