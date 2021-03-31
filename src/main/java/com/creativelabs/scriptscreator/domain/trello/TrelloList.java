@@ -8,5 +8,5 @@ import lombok.Getter;
 public class TrelloList {
     private String id;
     private String name;
-    private String closed;
+    private Boolean closed;
 }
