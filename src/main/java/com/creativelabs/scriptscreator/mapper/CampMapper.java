@@ -19,6 +19,7 @@ public class CampMapper {
                 campDto.getTrelloListId(),
                 campDto.getName(),
                 campDto.getDescription(),
+                campDto.getAttachmentUrl(),
                 npcMapper.mapToNpcList(campDto.getNpcList())
         );
     }
@@ -29,6 +30,7 @@ public class CampMapper {
                 camp.getTrelloListId(),
                 camp.getName(),
                 camp.getDescription(),
+                camp.getAttachmentUrl(),
                 npcMapper.mapToNpcDtoList(camp.getNpcList())
         );
     }

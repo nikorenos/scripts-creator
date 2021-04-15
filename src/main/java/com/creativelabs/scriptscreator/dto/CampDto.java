@@ -16,5 +16,6 @@ public class CampDto {
     private String trelloListId;
     private String name;
     private String description;
+    private String attachmentUrl;
     private List<NpcDto> npcList;
 }

@@ -20,6 +20,7 @@ public class Camp {
     private String trelloListId;
     private String name;
     private String description;
+    private String attachmentUrl;
     @OneToMany(targetEntity = Npc.class,
             mappedBy = "camp",
             cascade = CascadeType.ALL,
