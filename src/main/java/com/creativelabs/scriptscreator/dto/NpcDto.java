@@ -12,6 +12,7 @@ public class NpcDto {
     private String name;
     private String description;
     private Long campId;
+    private String location;
     private String trelloCardId;
     private String trelloCardUrl;
     private String attachmentUrl;

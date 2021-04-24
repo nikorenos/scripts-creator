@@ -26,6 +26,7 @@ public class Npc {
             fetch = FetchType.EAGER)
     @JoinColumn(name = "camp_id")
     private Camp camp;
+    private String location;
     private String trelloCardId;
     private String trelloCardUrl;
     private String attachmentUrl;

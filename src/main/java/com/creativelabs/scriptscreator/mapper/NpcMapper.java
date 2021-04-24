@@ -22,6 +22,10 @@ public class NpcMapper {
         npc.setScriptId(npcDto.getScriptId());
         npc.setName(npcDto.getName());
         npc.setDescription(npcDto.getDescription());
+        npc.setLocation(npcDto.getLocation());
+        npc.setTrelloCardId(npcDto.getTrelloCardId());
+        npc.setTrelloCardUrl(npcDto.getTrelloCardUrl());
+        npc.setAttachmentUrl(npcDto.getAttachmentUrl());
         Camp camp = campRepository.findById(npcDto.getCampId())
                 .orElseThrow(() -> new NotFoundException("Camp id: " + npcDto.getCampId() + " not found"));
         npc.setCamp(camp);
@@ -36,7 +40,10 @@ public class NpcMapper {
         npcDto.setName(npc.getName());
         npcDto.setDescription(npc.getDescription());
         npcDto.setCampId(npc.getCamp().getId());
-
+        npcDto.setLocation(npc.getLocation());
+        npcDto.setTrelloCardId(npc.getTrelloCardId());
+        npcDto.setTrelloCardUrl(npc.getTrelloCardUrl());
+        npcDto.setAttachmentUrl(npc.getAttachmentUrl());
         return npcDto;
     }
 
