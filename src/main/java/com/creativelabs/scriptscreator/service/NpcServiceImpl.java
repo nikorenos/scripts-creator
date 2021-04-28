@@ -54,6 +54,8 @@ public class NpcServiceImpl implements NpcService {
         Camp camp = campRepository.findById(npcDto.getCampId())
                 .orElseThrow(() -> new NotFoundException("Camp id: " + npcDto.getCampId() + " not found"));
         foundNpc.setCamp(camp);
+        foundNpc.setLocation(npcDto.getLocation());
+        foundNpc.setAttachmentUrl(npcDto.getAttachmentUrl());
         saveNpc(foundNpc);
         return foundNpc;
     }
