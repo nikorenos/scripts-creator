@@ -29,10 +29,10 @@ public class EmailService {
         }
     }
 
-    public void sendDailyTasksReport(final Mail mail) {
+    public void sendDailyNpcReport(final Mail mail) {
         LOGGER.info("Starting daily report email preparation...");
         try {
-            javaMailSender.send(createMimeTasksReport(mail));
+            javaMailSender.send(createMimeNpcReport(mail));
             LOGGER.info("Daily report email has been sent.");
         } catch (MailException e) {
             LOGGER.error("Failed to process daily report email sending: ", e.getMessage(), e);
@@ -47,12 +47,12 @@ public class EmailService {
             messageHelper.setText(mailCreatorService.buildTrelloCardEmail(mail.getMessage()), true);
         };
     }
-    private MimeMessagePreparator createMimeTasksReport(final Mail mail) {
+    private MimeMessagePreparator createMimeNpcReport(final Mail mail) {
         return mimeMessage -> {
             MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
             messageHelper.setTo(mail.getMailTo());
             messageHelper.setSubject(mail.getSubject());
-            messageHelper.setText(mailCreatorService.dailyTasksReportEmail(mail.getMessage()), true);
+            messageHelper.setText(mailCreatorService.dailyNpcReportEmail(mail.getMessage()), true);
         };
     }
 }
