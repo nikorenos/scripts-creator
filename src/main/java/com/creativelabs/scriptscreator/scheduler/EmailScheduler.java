@@ -23,21 +23,6 @@ public class EmailScheduler {
     @Autowired
     private AdminConfig adminConfig;
 
-    @Scheduled(cron = "0 0 10 * * *")
-    //@Scheduled(fixedDelay = 10000)
-    public void sendInformationEmail() {
-        long size = npcRepository.count();
-        String message = "Currently in database you got: " + size + " npc.";
-        if (size == 1) {
-            message = "Currently in database you got: " + size + " npc.";
-        }
-        emailService.send(new Mail(
-                adminConfig.getAdminMail(),
-                SUBJECT,
-                message)
-        );
-    }
-
     @Scheduled(cron = "0 0 09 * * *")
     //@Scheduled(fixedDelay = 10000)
     public void weeklyNpcReportEmail() {

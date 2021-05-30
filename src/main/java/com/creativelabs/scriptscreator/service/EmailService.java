@@ -19,16 +19,6 @@ public class EmailService {
     @Autowired
     private JavaMailSender javaMailSender;
 
-    public void send(final Mail mail) {
-        LOGGER.info("Starting email preparation...");
-        try {
-            javaMailSender.send(createMimeMessage(mail));
-            LOGGER.info("Email has been sent.");
-        } catch (MailException e) {
-            LOGGER.error("Failed to process email sending: ", e.getMessage(), e);
-        }
-    }
-
     public void sendWeeklyNpcReport(final Mail mail) {
         LOGGER.info("Starting weekly report email preparation...");
         try {
@@ -37,15 +27,6 @@ public class EmailService {
         } catch (MailException e) {
             LOGGER.error("Failed to process daily report email sending: ", e.getMessage(), e);
         }
-    }
-
-    private MimeMessagePreparator createMimeMessage(final Mail mail) {
-        return mimeMessage -> {
-            MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
-            messageHelper.setTo(mail.getMailTo());
-            messageHelper.setSubject(mail.getSubject());
-            messageHelper.setText(mailCreatorService.buildTrelloCardEmail(mail.getMessage()), true);
-        };
     }
     private MimeMessagePreparator createMimeNpcReport(final Mail mail) {
         return mimeMessage -> {
