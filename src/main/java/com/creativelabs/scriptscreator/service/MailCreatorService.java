@@ -52,15 +52,15 @@ public class MailCreatorService {
 
         Context context = new Context();
         context.setVariable("message", message);
-        context.setVariable("goodbye_message", "Thank you for using Crud App!");
+        context.setVariable("goodbye_message", "Thank you for using Scripts Creator App!");
         context.setVariable("info_company_name", adminConfig.getInfoCompanyName());
         context.setVariable("info_company_goal", adminConfig.getInfoCompanyGoal());
         context.setVariable("info_company_email", adminConfig.getInfoCompanyEmail());
         context.setVariable("separator", ", ");
         context.setVariable("is_friend", false);
-        context.setVariable("howManyTasks", size);
+        context.setVariable("howManyNpc", size);
         context.setVariable("admin_config", adminConfig);
-        context.setVariable("tasks_list", npcList);
-        return templateEngine.process("mail/daily-tasks-report-mail", context);
+        context.setVariable("npc_list", npcList);
+        return templateEngine.process("mail/weekly-npc-report-mail", context);
     }
 }

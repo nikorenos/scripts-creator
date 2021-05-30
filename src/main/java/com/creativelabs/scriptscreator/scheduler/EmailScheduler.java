@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 public class EmailScheduler {
 
     private static final String SUBJECT = "Npc: Once a day email";
-    private static final String REPORT_SUBJECT = "Daily npc report";
+    private static final String REPORT_SUBJECT = "Weekly npc report";
 
     @Autowired
     private EmailService emailService;
@@ -40,13 +40,13 @@ public class EmailScheduler {
 
     @Scheduled(cron = "0 0 09 * * *")
     //@Scheduled(fixedDelay = 10000)
-    public void dailyNpcReportEmail() {
+    public void weeklyNpcReportEmail() {
         long size = npcRepository.count();
         String message = "Currently in database you got: " + size + " npc.";
         if (size == 1) {
             message = "Currently in database you got: " + size + " npc.";
         }
-        emailService.sendDailyNpcReport(new Mail(
+        emailService.sendWeeklyNpcReport(new Mail(
                 adminConfig.getAdminMail(),
                 REPORT_SUBJECT,
                 message)

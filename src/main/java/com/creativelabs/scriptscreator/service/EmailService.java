@@ -29,11 +29,11 @@ public class EmailService {
         }
     }
 
-    public void sendDailyNpcReport(final Mail mail) {
-        LOGGER.info("Starting daily report email preparation...");
+    public void sendWeeklyNpcReport(final Mail mail) {
+        LOGGER.info("Starting weekly report email preparation...");
         try {
             javaMailSender.send(createMimeNpcReport(mail));
-            LOGGER.info("Daily report email has been sent.");
+            LOGGER.info("Weekly report email has been sent.");
         } catch (MailException e) {
             LOGGER.error("Failed to process daily report email sending: ", e.getMessage(), e);
         }
