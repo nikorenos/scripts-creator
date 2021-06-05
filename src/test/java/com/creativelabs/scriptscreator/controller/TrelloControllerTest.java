@@ -53,7 +53,7 @@ public class TrelloControllerTest {
     public void shouldFetchTrelloBoards() throws Exception {
         // Given
         List<TrelloListDto> trelloLists = new ArrayList<>();
-        trelloLists.add(new TrelloListDto("1", "Test list", "top"));
+        trelloLists.add(new TrelloListDto("1", "Test list", "top", false));
 
         List<TrelloBoardDto> trelloBoards = new ArrayList<>();
         trelloBoards.add(new TrelloBoardDto("1", "Test board", trelloLists));
